@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Json Formatter and Prettifier | JSON & HashMap Formatter</title>
-    <meta name="description" content="A powerful, browser-based tool to prettify JSON and Java-style HashMaps. Supports multiple tabs, auto-expanding input, and local cache persistence.">
-    <meta name="keywords" content="JSON Prettifier, HashMap Formatter, JSON Viewer, Java HashMap to JSON, Online Formatter, Developer Tools">
+    <meta name="description"
+        content="A powerful, browser-based tool to prettify JSON and Java-style HashMaps. Supports multiple tabs, auto-expanding input, and local cache persistence.">
+    <meta name="keywords"
+        content="JSON Prettifier, HashMap Formatter, JSON Viewer, Java HashMap to JSON, Online Formatter, Developer Tools">
     <meta name="author" content="RajSDE/GitHub Handle">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://RajSDE.github.io/json-formatter/">
+    <meta property="og:url" content="https://rajsde.github.io/json-formatter/">
     <meta property="og:title" content="Json Formatter and Prettifier">
-    <meta property="og:description" content="Format JSON and HashMaps instantly. Features multi-tab support and local storage saving.">
+    <meta property="og:description"
+        content="Format JSON and HashMaps instantly. Features multi-tab support and local storage saving.">
     <meta property="og:image" content="https://yourusername.github.io/your-repo-name/preview-image.png">
 
     <meta property="twitter:card" content="summary_large_image">
@@ -60,9 +64,15 @@
             display: flex;
             gap: 4px;
             overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
+            /* Firefox */
         }
-        .tabs-container::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Chrome/Safari */
 
         .tab {
             background: #cbd0d7;
@@ -85,7 +95,7 @@
         .tab.active {
             background: var(--tab-active);
             font-weight: 600;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
         }
 
         .tab .close-tab {
@@ -100,136 +110,244 @@
             margin-left: auto;
         }
 
-        .tab .close-tab:hover { background-color: #e8eaed; color: #000; }
+        .tab .close-tab:hover {
+            background-color: #e8eaed;
+            color: #000;
+        }
 
         .add-tab-btn {
-            background: none; border: none; font-size: 22px; cursor: pointer;
-            margin-left: 10px; margin-bottom: 6px; color: #5f6368;
-            border-radius: 50%; width: 30px; height: 30px;
-            display: flex; align-items: center; justify-content: center;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            margin-left: 10px;
+            margin-bottom: 6px;
+            color: #5f6368;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .add-tab-btn:hover { background-color: #d0d3d8; color: #000; }
+
+        .add-tab-btn:hover {
+            background-color: #d0d3d8;
+            color: #000;
+        }
 
         /* Content Area */
-        .main-container { width: 100%; max-width: 1100px; padding: 20px; box-sizing: border-box; }
+        .main-container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
         .tab-content {
-            display: none; background: white; padding: 30px;
-            border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
-        .tab-content.active { display: block; animation: fadeIn 0.2s; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.2s;
+        }
 
-        h1 { font-size: 24px; margin-top: 0; }
-        .subtitle { color: var(--text-secondary); margin-bottom: 20px; font-size: 14px; }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
 
         textarea {
-            width: 100%; min-height: 300px; margin: 15px 0; padding: 15px;
-            border: 2px solid #e4e6eb; border-radius: 8px;
+            width: 100%;
+            min-height: 300px;
+            margin: 15px 0;
+            padding: 15px;
+            border: 2px solid #e4e6eb;
+            border-radius: 8px;
             font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-            font-size: 14px; line-height: 1.6; resize: none; overflow: hidden;
-            box-sizing: border-box; outline: none; background-color: #fafafa;
+            font-size: 14px;
+            line-height: 1.6;
+            resize: none;
+            overflow: hidden;
+            box-sizing: border-box;
+            outline: none;
+            background-color: #fafafa;
             transition: all 0.2s;
         }
-        textarea:focus { border-color: var(--primary-blue); background-color: #fff; box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.1); }
 
-        .actions { display: flex; gap: 12px; margin-bottom: 10px; }
-        button.action-btn { 
-            padding: 12px 24px; font-weight: 600; border: none; 
-            border-radius: 6px; cursor: pointer; font-size: 14px;
+        textarea:focus {
+            border-color: var(--primary-blue);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.1);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        button.action-btn {
+            padding: 12px 24px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
             transition: transform 0.1s, filter 0.2s;
         }
-        button.action-btn:active { transform: scale(0.98); }
-        .primary { background: var(--primary-blue); color: white; }
-        .secondary { background: #e4e6eb; color: #4b4f56; }
-        button.action-btn:hover { filter: brightness(0.9); }
 
-        .error { 
-            color: #d93025; font-size: 14px; padding: 12px;
-            background: #fce8e6; border-radius: 6px; display: none; margin-top: 15px;
+        button.action-btn:active {
+            transform: scale(0.98);
+        }
+
+        .primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .secondary {
+            background: #e4e6eb;
+            color: #4b4f56;
+        }
+
+        button.action-btn:hover {
+            filter: brightness(0.9);
+        }
+
+        .error {
+            color: #d93025;
+            font-size: 14px;
+            padding: 12px;
+            background: #fce8e6;
+            border-radius: 6px;
+            display: none;
+            margin-top: 15px;
             border-left: 4px solid #d93025;
         }
 
-        footer { margin-top: 40px; color: var(--text-secondary); font-size: 12px; padding-bottom: 20px; }
+        footer {
+            margin-top: 40px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid #e4e6eb;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
     </style>
 </head>
+
 <body>
 
-<div class="tab-wrapper">
-    <div class="tabs-container" id="tabsContainer"></div>
-    <button class="add-tab-btn" title="Add New Tab" onclick="addNewTab()">+</button>
-</div>
+    <div class="tab-wrapper">
+        <div class="tabs-container" id="tabsContainer"></div>
+        <button class="add-tab-btn" title="Add New Tab" onclick="addNewTab()">+</button>
+    </div>
 
-<div class="main-container" id="contentsContainer"></div>
+    <div class="main-container" id="contentsContainer"></div>
 
-<footer>
-    Open Source Prettifier | Data is processed locally in your browser.
-</footer>
+    <footer>
+        Built with ❤️ by <a href="https://github.com/rajsde" target="_blank" rel="noopener noreferrer">@rajsde</a> |
+        Data is processed locally in your browser for privacy.
+    </footer>
 
-<script>
-    let tabCount = 0;
-    let activeTabId = null;
+    <script>
+        let tabCount = 0;
+        let activeTabId = null;
 
-    // --- CACHE LOGIC ---
-    function saveToCache() {
-        const state = {
-            activeTabId: activeTabId,
-            tabCount: tabCount,
-            tabs: []
-        };
-        document.querySelectorAll('.tab-content').forEach(contentDiv => {
-            const id = contentDiv.id;
-            const textarea = document.getElementById(`input-${id}`);
-            const tabHeader = document.getElementById(`header-${id}`);
-            state.tabs.push({
-                id: id,
-                name: tabHeader.querySelector('span').innerText,
-                content: textarea.value
+        // --- CACHE LOGIC ---
+        function saveToCache() {
+            const state = {
+                activeTabId: activeTabId,
+                tabCount: tabCount,
+                tabs: []
+            };
+            document.querySelectorAll('.tab-content').forEach(contentDiv => {
+                const id = contentDiv.id;
+                const textarea = document.getElementById(`input-${id}`);
+                const tabHeader = document.getElementById(`header-${id}`);
+                state.tabs.push({
+                    id: id,
+                    name: tabHeader.querySelector('span').innerText,
+                    content: textarea.value
+                });
             });
-        });
-        localStorage.setItem('prettifier_workspace_v2', JSON.stringify(state));
-    }
-
-    function loadFromCache() {
-        const saved = localStorage.getItem('prettifier_workspace_v2');
-        if (saved) {
-            const state = JSON.parse(saved);
-            tabCount = state.tabCount || 0;
-            state.tabs.forEach(tabData => {
-                createTabElements(tabData.id, tabData.name, tabData.content);
-            });
-            if (state.activeTabId && document.getElementById(state.activeTabId)) {
-                switchTab(state.activeTabId);
-            } else if (state.tabs.length > 0) {
-                switchTab(state.tabs[0].id);
-            }
-        } else {
-            addNewTab();
+            localStorage.setItem('prettifier_workspace_v2', JSON.stringify(state));
         }
-    }
 
-    // --- TAB LOGIC ---
-    function addNewTab() {
-        tabCount++;
-        const id = `tab-${tabCount}`;
-        createTabElements(id, `Tab ${tabCount}`, "");
-        switchTab(id);
-        saveToCache();
-    }
+        function loadFromCache() {
+            const saved = localStorage.getItem('prettifier_workspace_v2');
+            if (saved) {
+                const state = JSON.parse(saved);
+                tabCount = state.tabCount || 0;
+                state.tabs.forEach(tabData => {
+                    createTabElements(tabData.id, tabData.name, tabData.content);
+                });
+                if (state.activeTabId && document.getElementById(state.activeTabId)) {
+                    switchTab(state.activeTabId);
+                } else if (state.tabs.length > 0) {
+                    switchTab(state.tabs[0].id);
+                }
+            } else {
+                addNewTab();
+            }
+        }
 
-    function createTabElements(id, name, contentValue) {
-        const tab = document.createElement('div');
-        tab.className = 'tab';
-        tab.id = `header-${id}`;
-        tab.onclick = () => switchTab(id);
-        tab.innerHTML = `<span>${name}</span><span class="close-tab" onclick="closeTab(event, '${id}')" title="Close Tab">&times;</span>`;
-        document.getElementById('tabsContainer').appendChild(tab);
+        // --- TAB LOGIC ---
+        function addNewTab() {
+            tabCount++;
+            const id = `tab-${tabCount}`;
+            createTabElements(id, `Tab ${tabCount}`, "");
+            switchTab(id);
+            saveToCache();
+        }
 
-        const content = document.createElement('div');
-        content.className = 'tab-content';
-        content.id = id;
-        content.innerHTML = `
+        function createTabElements(id, name, contentValue) {
+            const tab = document.createElement('div');
+            tab.className = 'tab';
+            tab.id = `header-${id}`;
+            tab.onclick = () => switchTab(id);
+            tab.innerHTML = `<span>${name}</span><span class="close-tab" onclick="closeTab(event, '${id}')" title="Close Tab">&times;</span>`;
+            document.getElementById('tabsContainer').appendChild(tab);
+
+            const content = document.createElement('div');
+            content.className = 'tab-content';
+            content.id = id;
+            content.innerHTML = `
             <h1>Universal Prettifier</h1>
             <p class="subtitle">Supports JSON and Java-style HashMaps {key=value}.</p>
             <textarea id="input-${id}" placeholder="Paste your data here..." oninput="handleInput(this)">${contentValue}</textarea>
@@ -239,95 +357,96 @@
             </div>
             <div id="error-${id}" class="error"></div>
         `;
-        document.getElementById('contentsContainer').appendChild(content);
-        
-        autoExpand(document.getElementById(`input-${id}`));
-    }
+            document.getElementById('contentsContainer').appendChild(content);
 
-    function handleInput(el) {
-        autoExpand(el);
-        saveToCache();
-    }
-
-    function switchTab(id) {
-        document.querySelectorAll('.tab, .tab-content').forEach(el => el.classList.remove('active'));
-        const activeHeader = document.getElementById(`header-${id}`);
-        const activeContent = document.getElementById(id);
-        
-        if(activeHeader && activeContent) {
-            activeHeader.classList.add('active');
-            activeContent.classList.add('active');
-            activeTabId = id;
             autoExpand(document.getElementById(`input-${id}`));
+        }
+
+        function handleInput(el) {
+            autoExpand(el);
             saveToCache();
         }
-    }
 
-    function closeTab(event, id) {
-        event.stopPropagation();
-        document.getElementById(`header-${id}`).remove();
-        document.getElementById(id).remove();
+        function switchTab(id) {
+            document.querySelectorAll('.tab, .tab-content').forEach(el => el.classList.remove('active'));
+            const activeHeader = document.getElementById(`header-${id}`);
+            const activeContent = document.getElementById(id);
 
-        const remainingTabs = document.querySelectorAll('.tab');
-        if (remainingTabs.length > 0) {
-            if (activeTabId === id) {
-                const lastId = remainingTabs[remainingTabs.length - 1].id.replace('header-', '');
-                switchTab(lastId);
+            if (activeHeader && activeContent) {
+                activeHeader.classList.add('active');
+                activeContent.classList.add('active');
+                activeTabId = id;
+                autoExpand(document.getElementById(`input-${id}`));
+                saveToCache();
             }
-        } else {
-            addNewTab();
         }
-        saveToCache();
-    }
 
-    function autoExpand(element) {
-        if (!element) return;
-        element.style.height = 'auto';
-        element.style.height = (element.scrollHeight) + 'px';
-    }
+        function closeTab(event, id) {
+            event.stopPropagation();
+            document.getElementById(`header-${id}`).remove();
+            document.getElementById(id).remove();
 
-    function processData(tabId) {
-        const area = document.getElementById(`input-${tabId}`);
-        const errorBox = document.getElementById(`error-${tabId}`);
-        let raw = area.value.trim();
-        if (!raw) return;
-        errorBox.style.display = 'none';
+            const remainingTabs = document.querySelectorAll('.tab');
+            if (remainingTabs.length > 0) {
+                if (activeTabId === id) {
+                    const lastId = remainingTabs[remainingTabs.length - 1].id.replace('header-', '');
+                    switchTab(lastId);
+                }
+            } else {
+                addNewTab();
+            }
+            saveToCache();
+        }
 
-        try {
-            let finalValue = "";
+        function autoExpand(element) {
+            if (!element) return;
+            element.style.height = 'auto';
+            element.style.height = (element.scrollHeight) + 'px';
+        }
+
+        function processData(tabId) {
+            const area = document.getElementById(`input-${tabId}`);
+            const errorBox = document.getElementById(`error-${tabId}`);
+            let raw = area.value.trim();
+            if (!raw) return;
+            errorBox.style.display = 'none';
+
             try {
-                // Try strict JSON first
-                finalValue = JSON.stringify(JSON.parse(raw), null, 4);
-            } catch (e) {
-                // Clean up HashMap/Loose format
-                let clean = raw.replace(/=/g, ':')
-                    .replace(/([{,]\s*)([a-zA-Z0-9_\-]+)\s*:/g, '$1"$2":')
-                    .replace(/:\s*([^,{}]+)(?=\s*[,}])|:\s*([^,{}]+)$/g, (match, p1, p2) => {
-                        let val = (p1 || p2).trim();
-                        if (['true', 'false', 'null'].includes(val.toLowerCase()) || (!isNaN(val) && !/^0[0-9]+/.test(val))) return ":" + val;
-                        return ':"' + val.replace(/"/g, '\\"') + '"';
-                    });
-                finalValue = JSON.stringify(JSON.parse(clean), null, 4);
+                let finalValue = "";
+                try {
+                    // Try strict JSON first
+                    finalValue = JSON.stringify(JSON.parse(raw), null, 4);
+                } catch (e) {
+                    // Clean up HashMap/Loose format
+                    let clean = raw.replace(/=/g, ':')
+                        .replace(/([{,]\s*)([a-zA-Z0-9_\-]+)\s*:/g, '$1"$2":')
+                        .replace(/:\s*([^,{}]+)(?=\s*[,}])|:\s*([^,{}]+)$/g, (match, p1, p2) => {
+                            let val = (p1 || p2).trim();
+                            if (['true', 'false', 'null'].includes(val.toLowerCase()) || (!isNaN(val) && !/^0[0-9]+/.test(val))) return ":" + val;
+                            return ':"' + val.replace(/"/g, '\\"') + '"';
+                        });
+                    finalValue = JSON.stringify(JSON.parse(clean), null, 4);
+                }
+                area.value = finalValue;
+                autoExpand(area);
+                saveToCache();
+            } catch (err) {
+                errorBox.textContent = "Error: Invalid data structure. Please check your brackets and commas.";
+                errorBox.style.display = 'block';
             }
-            area.value = finalValue;
-            autoExpand(area);
-            saveToCache();
-        } catch (err) {
-            errorBox.textContent = "Error: Invalid data structure. Please check your brackets and commas.";
-            errorBox.style.display = 'block';
         }
-    }
 
-    function clearTab(id) {
-        const area = document.getElementById(`input-${id}`);
-        area.value = '';
-        area.style.height = 'auto';
-        document.getElementById(`error-${id}`).style.display = 'none';
-        saveToCache();
-    }
+        function clearTab(id) {
+            const area = document.getElementById(`input-${id}`);
+            area.value = '';
+            area.style.height = 'auto';
+            document.getElementById(`error-${id}`).style.display = 'none';
+            saveToCache();
+        }
 
-    window.onload = loadFromCache;
-</script>
+        window.onload = loadFromCache;
+    </script>
 
 </body>
+
 </html>
