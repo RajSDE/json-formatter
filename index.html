@@ -267,7 +267,6 @@
         footer a:hover {
             text-decoration: underline;
         }
-        
     </style>
 </head>
 
@@ -381,22 +380,59 @@
             }
         }
 
+        /* function closeTab(event, id) {
+             event.stopPropagation();
+             document.getElementById(`header-${id}`).remove();
+             document.getElementById(id).remove();
+ 
+             const remainingTabs = document.querySelectorAll('.tab');
+             if (remainingTabs.length > 0) {
+                 if (activeTabId === id) {
+                     const lastId = remainingTabs[remainingTabs.length - 1].id.replace('header-', '');
+                     switchTab(lastId);
+                 }
+             } else {
+                 addNewTab();
+             }
+             saveToCache();
+         } */
+
+        // Updated closeTab logic
         function closeTab(event, id) {
             event.stopPropagation();
-            document.getElementById(`header-${id}`).remove();
-            document.getElementById(id).remove();
+
+            const tabHeader = document.getElementById(`header-${id}`);
+            const tabContent = document.getElementById(id);
+
+            if (tabHeader) tabHeader.remove();
+            if (tabContent) tabContent.remove();
 
             const remainingTabs = document.querySelectorAll('.tab');
+
             if (remainingTabs.length > 0) {
+                // If we closed the active tab, switch to the last available one
                 if (activeTabId === id) {
                     const lastId = remainingTabs[remainingTabs.length - 1].id.replace('header-', '');
                     switchTab(lastId);
                 }
             } else {
+                // RESET LOGIC: If no tabs are left, reset the counter and start over from 1
+                tabCount = 0;
                 addNewTab();
             }
             saveToCache();
         }
+
+        // Ensure addNewTab uses the reset count
+        function addNewTab() {
+            tabCount++;
+            const id = `tab-${tabCount}`;
+            // We use tabCount for the label so it stays consistent (Tab 1, Tab 2...)
+            createTabElements(id, `Tab ${tabCount}`, "");
+            switchTab(id);
+            saveToCache();
+        }
+
 
         function autoExpand(element) {
             if (!element) return;
